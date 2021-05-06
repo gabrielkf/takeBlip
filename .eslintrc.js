@@ -28,6 +28,8 @@ module.exports = {
         ts: 'never',
       },
     ],
+    camelcase: 0,
+    'array-callback-return': 0,
   },
   settings: {
     'import/resolver': {
