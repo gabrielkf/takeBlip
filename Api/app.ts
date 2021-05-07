@@ -8,8 +8,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use('/img', express.static(`${__dirname}/assets`));
 app.use(routes);
 
-app.listen(PORT, () => {
-  console.log(`*** Listening on port ${PORT} ***`);
-});
+app.listen(PORT);
