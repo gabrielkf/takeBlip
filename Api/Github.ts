@@ -15,6 +15,10 @@ interface RepoData {
   description: string;
 }
 
+interface ReposObject {
+  [name: string]: RepoData;
+}
+
 export default class GithubRepos {
   private api: AxiosInstance;
 
@@ -22,7 +26,10 @@ export default class GithubRepos {
 
   private queries = ['sort=created', 'direction=asc'];
 
-  public repos: RepoData[] = [];
+  public repos: ReposObject = {};
+
+  private count = 0;
+  // public repos: RepoData[] = [];
 
   constructor(user: string) {
     this.api = axios.create({
@@ -33,12 +40,14 @@ export default class GithubRepos {
   }
 
   public async oldest(count: number): Promise<void> {
+    this.count = count;
+
     const res = await this.api.get(
       `${this.userQuery}?${this.queries.join('&')}`
     );
 
-    res.data.map((repo: Response) => {
-      if (this.repos.length < count) {
+    res.data.map((repo: Response, index: number) => {
+      if (this.count) {
         const {
           full_name,
           owner: { avatar_url },
@@ -47,11 +56,11 @@ export default class GithubRepos {
         } = repo;
 
         if (language === 'C#') {
-          this.repos.push({
+          this.repos[`repo_${index + 1}`] = {
             full_name,
             avatar_url,
             description,
-          });
+          };
         }
       }
     });
