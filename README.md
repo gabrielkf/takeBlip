@@ -11,13 +11,26 @@ Express and Axios frameworks, and it's deployed on [Heroku](https://take-blip.he
 
 Typescript was chosen for this project to ease debugging process, as well as ensuring data standardization and getting the productivity benefits of autocomplete for strongly typed data.
 
-When the server receives a get request, it performs the following:
+When the server receives a GET request, it performs the following:
 * Consults the Github API for [Take](https://github.com/takenet)'s repositories
 * Filters the five oldest ones which have C# as their main language
 * Returns the following object:
 ```
 {
   repo_1: {
+    avatar_url,
+    full_name,
+    description
+  },
+  repo_2: {
+    avatar_url,
+    full_name,
+    description
+  },
+
+  {...},
+
+  repo_5: {
     avatar_url,
     full_name,
     description
