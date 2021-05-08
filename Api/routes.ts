@@ -12,7 +12,7 @@ routes.get('/', async (req, res) => {
     await github.oldest(COUNT);
     const { repos } = github;
 
-    if (!repos.length)
+    if (!Object.keys(repos).length)
       throw new Error('No repositories found');
 
     return res.json(repos);
