@@ -47,7 +47,7 @@ export default class GithubRepos {
     );
 
     res.data.map((repo: Response, index: number) => {
-      if (this.count) {
+      if (this.count > 0) {
         const {
           full_name,
           owner: { avatar_url },
@@ -56,11 +56,15 @@ export default class GithubRepos {
         } = repo;
 
         if (language === 'C#') {
-          this.repos[`repo_${index + 1}`] = {
+          this.repos[
+            `repo_${Object.keys(this.repos).length + 1}`
+          ] = {
             full_name,
             avatar_url,
             description,
           };
+
+          this.count--;
         }
       }
     });

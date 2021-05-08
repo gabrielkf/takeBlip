@@ -30,6 +30,7 @@ module.exports = {
     ],
     camelcase: 0,
     'array-callback-return': 0,
+    'no-plusplus': 0
   },
   settings: {
     'import/resolver': {
